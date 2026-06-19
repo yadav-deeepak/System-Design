@@ -1,0 +1,47 @@
+#################################################################
+❄️ Chapter 1: Relaiable, Scalable and Maintainable Applications 
+#################################################################
+1. Reliability 
+===============
+-> The system should continue to work correctly (performing the correct function at the desired performance) even in the face of adversity (hardware or software faults and even human error)
+1. Hardware faults 
+2. Software errors 
+3. Human errors 
+
+2. Scalability 
+================
+-> As the system grows (in data volume, traffic volume or complexity) there should be reasonable ways of dealing with that growth.
+
+a. Describing load 
+-------------------
+-> First we need to describe the current load on the system only then we can discuss growth questions (what happen if our load doubles ?).
+-> Load can be describe with a few numbers which we call load parameters. The best choice for the parameter depends on the architecture of your system perhaps its request per sec to a webserver , ratio of reads to writes in a database, the number of simultaneously active users in a chat room, the hit rate on a cache or something else. 
+
+## Fan out - The number of request we need to make in order to serve one incoming request. 
+
+
+b. Describing performance 
+-------------------------
+-> Once the load for the system is described we can investigate what happens when the load increases. We can look at it in two ways: 
+1. When we increase a load parameter and keep the system resources (CPU, memory, network bandwidth etc) unchanged how is performance of the system affected? 
+2. When you  increase a load parameter how much do you need to increase the resource if you want to keep performance unchanged?
+
+Latency and response time -> The response time is what the client sees besides the actual time to process the request (the service time) it includes network delays and queueing delays. Latency is the duration that a request is waiting to be handled during which it is latent awaiting service.
+
+c. Approches for coping with load 
+----------------------------------
+## How do we maintain the good performance even when our load parameters increase by some amount? 
+-> There are basically two approches for scaling the system : 
+
+1. Horizontal scaling - Scaling out distributing the load across multiple smaller machines.
+-> Distributing load across multiple machines is also known as a shared nothing architecture.
+
+2. Vertical scaling - Scale up moving to a more powerful machine.
+
+3. Maintainability 
+===================
+-> Over time many different people will work on the system (engineering and operations both maintaining current behaviour and adapting the system to new use cases), and they should all be able to work on it productively. 
+-> We will pay particular attention to three design priciples for software systems: 
+a. Operability - Make it easy for operations teams to keep the system running smoothly.
+b. Simplicity - Make it easy for new engineers to understand the system by removing as much complexity as possible from the system. 
+c. Evolvability - Make it easy for engineers in future to make changes to the system adapting it for unanticipated use cases as requirements change. Also known as extensibility, modifiability or plasticity.
