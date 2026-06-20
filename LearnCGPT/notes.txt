@@ -1,0 +1,262 @@
+##################
+❄️ System Design 
+##################
+-> Process of designing software architecture and infrastructure .
+
+🌟 Goals 
+*********
+-> Scalability
+-> Reliability
+-> Availability 
+-> Performance 
+-> Maintainability
+
+🌟 Main components 
+********************
+-> Client 
+-> Server
+-> Database 
+-> Cache 
+-> Load balancer 
+-> Message queue 
+
+📅 Types of system design 
+**************************
+1. HLD - High Level Design 
+===========================
+-> Overall architecture
+-> Components and communication 
+
+2. LLD - Low Level Design 
+==========================
+-> Classes 
+-> Objects 
+-> Design Patterns 
+
+Note: Formula to remember 
+-> System design = Building software that works efficiently even when millions of users use it simultaneously. 
+
+###############################
+❄️ Data Intensive Application 
+###############################
+-> A data intensive application is a system whose primary challenge is handling large volumes of data reliably, efficiently and at scale. 
+Eg: Whatsapp, amazon, netflix etc 
+
+🌬️ Typical data intensive architecture 
+***************************************
+Users
+   |
+Load Balancer
+   |
+Application Servers
+   |
++--------+--------+
+|                 |
+Cache         Database
+|                 |
++--------+--------+
+         |
+   Message Queue
+         |
+ Other Services
+
+✨ Main operations 
+********************
+-> Data storage 
+-> Data retrieval 
+-> Data processing 
+-> Data transfer 
+
+✨ Important characteristics 
+*****************************
+1. Reliability - Works correctly despite failure 
+2. Scalability - Handles increasing traffic/load.
+3. Maintainability - Easy to modify and maintain 
+
+Note : Data intensive application are all about efficiently managing data at scale. 
+
+################
+❄️ Reliability 
+################
+-> It is the ability of a system to continue functioning correctly and consistently even when faults occur such as hardware failures, software bugs or human errors. A reliable system prevents data loss ,provide correct results, and remain available despite failures
+-> A reliable system : 
+    => Producescorrect results 
+    => Handles failure gracefully 
+    => Does not lose important data 
+    => Continues serving users 
+
+🚗 Real-World Examples
+************************
+✨ Amazon 
+==========
+-> Suppose you are placing an order. 
+-> Even if one server crashes 
+User
+  |
+Load Balancer
+  |
+Server 1 ❌ (Crash)
+Server 2 ✅
+Server 3 ✅
+
+-> Amazon should still process your order 
+
+⚠️ Fault vs Failure
+**********************
+## Fault - A fault is a problem inside the system. 
+Examples : Hard disk failure 
+Network issue 
+Bug in code 
+Database crashes 
+
+-> A fault does not necessarily mean when users are affected.
+
+## Failure - A failure happens when users experience incorrect behaviour.
+Examples : 
+Website unavailable 
+Wrong account balance 
+Lost order 
+Application crash
+
+Example :  Database server crashes 
+-> This is a fault
+-> If another database replica takes over and users dont notice:  
+User continues normally 
+No failure occured
+
+🔥 Types of faults 
+====================
+1. Hardware faults 
+--------------------
+-> Hardware eventually fails. 
+Ex: Hard disk crash
+RAM failure 
+CPU failure 
+
+Server A
+   |
+Hard Disk ❌
+-> Data may become inaccessible 
+
+📅 How companies handle it ? 
+******************************
+1. Replication 
+===============
+-> Store copies of data 
+Database A
+Database B
+Database C
+
+-> If one fails 
+Database B continues
+
+-> Users are not affected 
+
+2. Software faults 
+==================
+-> These are often more dangerous 
+Ex: Bugs 
+Memory leaks 
+Infinite loops 
+Wrong business logic 
+
+Ex: Bug 
+if(balance >= amount)
+{
+    transfer();
+    transfer(); // accidental duplicate
+}
+-> Now money gets transferred twice 
+-> System is unreliable 
+
+3. Human errors 
+================
+-> Human mistakes causes many outrages 
+Ex: 
+Wrong deployement 
+Accidental database deletion 
+Wrong configuration 
+Incorrect DNS changes
+
+🧠 How do we build a reliable systems ?
+*****************************************
+## Technique 1: Redundancy 
+===========================
+-> Never rely on one component 
+-> For example we should have multiple databases if one fails then other continues 
+
+## Technique 2: Replication 
+============================
+-> Maintain multiple copies of data 
+
+Primary Database
+      |
+-----------------
+|       |       |
+Replica Replica Replica
+
+=> Benefits:
+✅ High availability
+✅ Better reliability
+
+## Technique 3: Monitoring 
+===========================
+-> Continously monitor systems. 
+Tools: Prometheous , Grafana , Datadog 
+-> Engineers should know immediately when something fails 
+
+## Technique 4: Automated recovery 
+===================================
+-> Instead of waiting for humans 
+
+Server Crash
+     |
+Auto Restart
+     |
+Healthy Again
+-> This reduces downtime 
+
+## Technique 5: Backups 
+=======================
+-> Always keep backups 
+Ex: 
+Database Deleted
+       |
+Restore Backup
+-> Without backups data may be lost forever 
+
+🎬 Netflix Reliability Example
+********************************
+-> Netflix assumes server will fail 
+-> Instead of preventing failures completely netflix designs systems that continue working despite failures. 
+-> They even created tools that intentionally breaks server to test reliability. 
+-> One famous tool was developed by Greg orzell and become known as chaos monkey .
+Purpose: 
+Random Server Crash
+       |
+System Survives
+-> If system survives it's reliable .
+
+################
+❄️ Scalability
+################ 
+-> Scalability is the ability of a system to handle increasing load without significantly affecting performance 
+-> In simple words as user grows the system should continue working efficiently.
+Ex: 100 users/day 
+// Architecture 
+Users
+  |
+Server
+  |
+Database
+-> Everything works fine 
+
+-> After success : 10 million users/day 
+Problems begin: Slow responwe, Database overload, Server crashes, Timeouts 
+-> Scalability helps solve these problems 
+
+
+
+
+
+Teach me the next system design topic
